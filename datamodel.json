@@ -1,0 +1,242 @@
+{
+    "article": {
+        "name": "article",
+        "description": "Guardian detail article",
+        "fields": {
+            "id": {
+                "type": "ID",
+                "required": true,
+                "description": "Content ID"
+            },
+            "webTitle": {
+                "type": "String",
+                "required": true,
+                "description": "WebTitle"
+            },
+            "webUrl": {
+                "type": "String",
+                "description": "webUrl"
+            },
+            "webPublicationDate": {
+                "type": "DateTime",
+                "description": "Publication date"
+            },
+            "fields": {
+                "type": "field",
+                "description": "Fields"
+            },
+            "tags": {
+                "type": "tag",
+                "description": "Tags",
+                "multivalued": true
+            },
+            "sectionId": {
+                "type": "String",
+                "description": "Section ID"
+            },
+            "sectionName": {
+                "type": "String",
+                "description": "Section Name"
+            }
+        },
+        "expose": true,
+        "multiEndpoint": {
+            "name": "articles",
+            "args": {
+                "q": {
+                    "type": "String"
+                },
+                "section": {
+                    "type": "String"
+                },
+                "path": {
+                    "type": "String",
+                    "required": true
+                },
+                "tag": {
+                    "type": "String"
+                }
+            }
+        },
+        "singleEndpoint": {
+            "name": "article",
+            "args": {
+                "ids": {
+                    "type": "String",
+                    "required": true,
+                    "modelField": "id",
+                    "description": "Content ID"
+                }
+            }
+        },
+        "connector": {
+            "type": "test",
+            "configs": {
+                "segment": "{path}",
+                "resultsPath": "response.editorsPicks",
+                "detailSegment": "search",
+                "detailResultsPath": "response.results.0",
+                "startFieldName": "page",
+                "limitFieldName": "page-size",
+                "orderByFieldName": "order-by"
+            }
+        }
+    },
+    "field": {
+        "name": "field",
+        "description": "Embedded Field",
+        "fields": {
+            "headline": {
+                "type": "ID",
+                "required": true
+            },
+            "body": {
+                "type": "HTML"
+            },
+            "thumbnail": {
+                "type": "ImageURL"
+            },
+            "lastModified": {
+                "type": "DateTime"
+            },
+            "trailText": {
+                "type": "String"
+            },
+            "main": {
+                "type": "HTML"
+            }
+        }
+    },
+    "tag": {
+        "name": "tag",
+        "description": "Embedded Tag List",
+        "fields": {
+            "id": {
+                "type": "ID",
+                "required": true
+            },
+            "webTitle": {
+                "type": "String"
+            },
+            "type": {
+                "type": "String"
+            }
+        }
+    },
+    "tagarticle": {
+        "name": "tagarticle",
+        "description": "Guardian detail article",
+        "fields": {
+            "id": {
+                "type": "ID",
+                "required": true,
+                "description": "Content ID"
+            },
+            "webTitle": {
+                "type": "String",
+                "required": true,
+                "description": "WebTitle"
+            },
+            "webPublicationDate": {
+                "type": "DateTime",
+                "description": "Publication date"
+            },
+            "fields": {
+                "type": "field",
+                "description": "Fields"
+            },
+            "tags": {
+                "type": "tag",
+                "description": "Tags",
+                "multivalued": true
+            },
+            "sectionId": {
+                "type": "String",
+                "description": "Section ID"
+            },
+            "sectionName": {
+                "type": "String",
+                "description": "Section Name"
+            }
+        },
+        "expose": true,
+        "multiEndpoint": {
+            "name": "tagarticles",
+            "args": {
+                "q": {
+                    "type": "String"
+                },
+                "section": {
+                    "type": "String"
+                },
+                "tag": {
+                    "type": "String"
+                }
+            }
+        },
+        "connector": {
+            "type": "test",
+            "configs": {
+                "segment": "search",
+                "resultsPath": "response.results",
+                "detailResultsPath": "response.results.0",
+                "startFieldName": "page",
+                "limitFieldName": "page-size",
+                "orderByFieldName": "order-by"
+            }
+        }
+    },
+    "relatedContent": {
+        "name": "relatedContent",
+        "description": "relatedContents",
+        "fields": {
+            "id": {
+                "type": "ID",
+                "required": true,
+                "description": "Content ID"
+            },
+            "webTitle": {
+                "type": "String",
+                "required": true,
+                "description": "WebTitle"
+            },
+            "webPublicationDate": {
+                "type": "DateTime",
+                "description": "Publication date"
+            },
+            "fields": {
+                "type": "field",
+                "description": "Fields"
+            }
+        },
+        "expose": true,
+        "singleEndpoint": {
+            "name": "detailrelated",
+            "args": {
+                "id": {
+                    "type": "String",
+                    "required": true
+                }
+            }
+        },
+        "multiEndpoint": {
+            "name": "related",
+            "args": {
+                "id": {
+                    "type": "String",
+                    "required": true
+                }
+            }
+        },
+        "connector": {
+            "type": "test",
+            "configs": {
+                "segment": "{id}",
+                "resultsPath": "response.relatedContent",
+                "startFieldName": "page",
+                "limitFieldName": "page-size",
+                "orderByFieldName": "order-by"
+            }
+        }
+    }
+}
